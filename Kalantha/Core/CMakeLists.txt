@@ -1,0 +1,21 @@
+add_library(KtaCore INTERFACE
+  Array.hpp
+  Assertions.hpp
+  ClassTraits.hpp
+  Common.hpp
+  Errors.hpp
+  IntegerSequence.hpp
+  Iterator.hpp
+  Limits.hpp
+  Memory.hpp
+  None.hpp
+  Option.hpp
+  Platform.hpp
+  Result.hpp
+  Try.hpp
+  Tuple.hpp
+  Types.hpp
+  Utility.hpp
+  Span.hpp
+  StringView.hpp
+)
