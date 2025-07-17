@@ -466,4 +466,7 @@ inline constexpr bool IsDefaultConstructible = __is_constructible(T);
 template<typename T>
 using UnderlyingType = __underlying_type(T);
 
+template<typename From, typename To>
+inline constexpr bool IsConvertible = __is_convertible(From, To);
+
 END_NAMESPACE_KTA_

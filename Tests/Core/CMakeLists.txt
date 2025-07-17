@@ -6,6 +6,7 @@ add_library(tests_core OBJECT
   TestArray.cpp
   TestSpan.cpp
   TestStringView.cpp
+  TestAlgorithm.cpp
 )
 
 target_link_libraries(tests_core PUBLIC

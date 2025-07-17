@@ -48,4 +48,23 @@ concept DefaultConstructible = IsDefaultConstructible<T>;
 template<typename T, typename ...Args>
 concept Constructs = IsDestructible<T> && IsConstructible<T, Args...>;
 
+template<typename From, typename To>
+concept ConvertibleTo = IsConvertible<From, To>;
+
+template<typename T>
+concept Comparable = requires(T a, T b) {
+  {a == b} -> ConvertibleTo<bool>;
+  {a != b} -> ConvertibleTo<bool>;
+};
+
+template<typename T>
+concept TotallyOrdered = requires(T a, T b) {
+  {a == b} -> ConvertibleTo<bool>;
+  {a != b} -> ConvertibleTo<bool>;
+  {a <  b} -> ConvertibleTo<bool>;
+  {a <= b} -> ConvertibleTo<bool>;
+  {a >  b} -> ConvertibleTo<bool>;
+  {a >= b} -> ConvertibleTo<bool>;
+};
+
 END_NAMESPACE_KTA_

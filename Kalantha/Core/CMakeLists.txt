@@ -18,4 +18,5 @@ add_library(KtaCore INTERFACE
   Utility.hpp
   Span.hpp
   StringView.hpp
+  Algorithm.hpp
 )
