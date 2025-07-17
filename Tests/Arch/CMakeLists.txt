@@ -1,4 +1,3 @@
-include(Arch)
 include(Common)
 
 if(KTA_IS_X86_64)
