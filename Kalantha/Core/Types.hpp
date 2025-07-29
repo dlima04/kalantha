@@ -18,3 +18,5 @@ using intptr  = __INTPTR_TYPE__;
 using ptrdiff = __PTRDIFF_TYPE__;
 using usize   = __SIZE_TYPE__;
 using byte    = uint8;
+
+static_assert(__CHAR_BIT__ == 8, "what the fuck?");

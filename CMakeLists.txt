@@ -25,6 +25,9 @@ kta_enumerate_arch()
 include_directories("${KTA_SOURCE_DIR}")
 add_library(project_options INTERFACE)
 target_compile_features(project_options INTERFACE cxx_std_23)
+target_compile_options(project_options INTERFACE
+  $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang>>:-O0>
+)
 
 add_library(project_warnings INTERFACE)
 target_compile_options(project_warnings INTERFACE
@@ -68,10 +71,12 @@ add_executable(runtests Tests/Entry.cpp)
 
 # link tests
 target_link_libraries(runtests PRIVATE tests_core)
+target_link_libraries(runtests PRIVATE tests_genericarch)
 target_link_libraries(runtests PRIVATE tests_allocators)
 
 # add cmake interface libraries (headers)
 target_link_libraries(runtests PRIVATE KtaCore)
+target_link_libraries(runtests PRIVATE KtaGenericArch)
 target_link_libraries(runtests PRIVATE KtaMeta)
 target_link_libraries(runtests PRIVATE KtaAllocators)
 

@@ -34,11 +34,6 @@ NODISCARD_ constexpr auto move(T&& obj) -> RemoveReference<T>&& {
   return static_cast<RemoveReference<T>&&>(obj);
 }
 
-template<typename T>
-NODISCARD_ constexpr auto cref(T&& obj) -> const RemoveReference<T>& {
-  return static_cast<const RemoveReference<T>&>(obj);
-}
-
 template <typename T>
 class ReferenceWrapper {
   KTA_MAKE_DEFAULT_CONSTRUCTIBLE(ReferenceWrapper);

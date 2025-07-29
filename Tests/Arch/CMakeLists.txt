@@ -1,5 +1,17 @@
 include(Common)
 
+# generic
+add_library(tests_genericarch OBJECT
+  Generic/TestEndian.cpp
+)
+
+target_link_libraries(tests_genericarch PUBLIC
+  project_warnings
+  project_options
+  Catch2::Catch2WithMain
+)
+
+# architecture-specific
 if(KTA_IS_X86_64)
   add_library(tests_x86_64 OBJECT
     x86_64/TestCPUID.cpp
@@ -11,3 +23,4 @@ if(KTA_IS_X86_64)
     Catch2::Catch2WithMain
   )
 endif()
+
