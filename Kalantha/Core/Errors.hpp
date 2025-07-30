@@ -17,6 +17,7 @@ BEGIN_NAMESPACE_KTA_
   X(InvalidArg, "An invalid argument was provided.") \
   X(NoMemory, "No memory left.") \
   X(NotImplemented, "This feature has not been implimented.") \
+  X(Overflow, "Something has \"overflowed\" or whatever idk.") \
   X(Generic, "I couldn't think of what the error should be.")
 
 struct ErrC {

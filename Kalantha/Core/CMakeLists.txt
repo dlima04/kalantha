@@ -8,7 +8,6 @@ add_library(KtaCore INTERFACE
   Iterator.hpp
   Limits.hpp
   Memory.hpp
-  None.hpp
   Option.hpp
   Platform.hpp
   Result.hpp
@@ -19,4 +18,7 @@ add_library(KtaCore INTERFACE
   Span.hpp
   StringView.hpp
   Algorithm.hpp
+  CharConv.hpp
+  DummyTypes.hpp
+  OStream.hpp
 )

@@ -10,7 +10,6 @@
 #include <Kalantha/Core/Types.hpp>
 #include <Kalantha/Core/Utility.hpp>
 #include <Kalantha/Meta/Concepts.hpp>
-
 BEGIN_NAMESPACE_KTA_
 
 template<typename T>
@@ -82,6 +81,6 @@ protected:
   PointerType ptr_{};
 };
 
-// TODO: generic reverse iterators.
+// TODO: generic reverse iterators for contiguous buffers
 
 END_NAMESPACE_KTA_

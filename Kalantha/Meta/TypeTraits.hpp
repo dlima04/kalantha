@@ -429,6 +429,9 @@ template<typename T>
 inline constexpr bool IsSigned = IsSame<T, SignedT<T>>;
 
 template<typename T>
+inline constexpr bool IsVoidPtr = IsPointer<T> && !IsCharacter<RemovePointer<T>>;
+
+template<typename T>
 inline constexpr bool IsAbstract = __is_abstract(T);
 
 template<typename T>

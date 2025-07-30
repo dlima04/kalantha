@@ -7,7 +7,7 @@
 
 #include <Kalantha/Core/Common.hpp>
 #include <Kalantha/Core/Platform.hpp>
-#include <Kalantha/Core/None.hpp>
+#include <Kalantha/Core/DummyTypes.hpp>
 #include <Kalantha/Core/ClassTraits.hpp>
 #include <Kalantha/Core/Types.hpp>
 #include <Kalantha/Meta/Concepts.hpp>
@@ -16,6 +16,8 @@ BEGIN_NAMESPACE_KTA_
 
 template<typename T, typename E>
 class Result_ {
+  KTA_MAKE_DEFAULT_CONSTRUCTIBLE(Result_);
+  KTA_MAKE_DEFAULT_ASSIGNABLE(Result_);
 public:
   using ValueType = T;
   using ErrorType = E;
@@ -76,13 +78,11 @@ public:
   }
 
   auto has_value() const -> bool { return value_.has_value(); }
+  auto has_error() const -> bool { return error_.has_value(); }
   explicit operator bool() const { return value_.has_value(); }
 
   template<typename ...Args> requires kta::IsConstructible<T, Args...>
   Result_(Args&&... args) : value_(T{std::forward<Args>(args)...}){}
-
-  Result_(Result_&& other)      = default;
-  Result_(Result_ const& other) = default;
   ~Result_() = default;
 
   Result_(const ValueType& val) : value_(val) {}

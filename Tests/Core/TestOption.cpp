@@ -63,7 +63,7 @@ TEST_CASE("Construct", "[Core.Option]") {
 TEST_CASE("Destroy", "[Core.Option]") {
   int num1 = 20;
   Option<DTORHelper1> obj1(static_cast<int&>(num1));
-  Option<DTORHelper1> obj2 = None;
+  Option<DTORHelper1> obj2 = none;
   Option<DTORHelper1> obj3(static_cast<int&>(num1));
 
   const bool is_ok = obj1.has_value() && obj3.has_value();

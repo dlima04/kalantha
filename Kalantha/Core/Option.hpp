@@ -13,7 +13,7 @@
 #include <Kalantha/Core/Assertions.hpp>
 #include <Kalantha/Core/Memory.hpp>
 #include <Kalantha/Core/ClassTraits.hpp>
-#include <Kalantha/Core/None.hpp>
+#include <Kalantha/Core/DummyTypes.hpp>
 
 BEGIN_NAMESPACE_KTA_
 

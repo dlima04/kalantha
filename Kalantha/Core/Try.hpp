@@ -21,7 +21,6 @@
   ({                                                                               \
     auto&& temp_result_ = (EXPR);                                                  \
     static_assert(!::kta::IsLvalueReference<decltype((EXPR).release_value())>);    \
-    ASSERT(temp_result_.has_value(), "Expr \"" #EXPR "\" evaluated to an error!"); \
+    KTA_ASSERT(temp_result_.has_value(), "Expr \"" #EXPR "\" has an error!");      \
     temp_result_.release_value();                                                  \
   })                                                                               \
-

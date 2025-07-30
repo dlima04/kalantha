@@ -7,6 +7,9 @@ add_library(tests_core OBJECT
   TestSpan.cpp
   TestStringView.cpp
   TestAlgorithm.cpp
+  TestCharConv.cpp
+  TestLimits.cpp
+  TestOStream.cpp
 )
 
 target_link_libraries(tests_core PUBLIC
