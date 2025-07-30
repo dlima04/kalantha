@@ -158,6 +158,5 @@ private:
 
 inline constinit OStream<> outs;
 inline constinit OStream<> errs;
-inline constinit OStream<> nulls;
 
 END_NAMESPACE_KTA_
