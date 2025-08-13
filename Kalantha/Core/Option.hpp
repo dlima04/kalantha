@@ -14,7 +14,6 @@
 #include <Kalantha/Core/Memory.hpp>
 #include <Kalantha/Core/ClassTraits.hpp>
 #include <Kalantha/Core/DummyTypes.hpp>
-
 BEGIN_NAMESPACE_KTA_
 
 template <Concrete T>

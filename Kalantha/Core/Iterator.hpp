@@ -28,35 +28,35 @@ public:
   }
 
   constexpr auto operator++() -> KtaIterator& {
-    ++ptr_;        /// Simply increment the internal pointer
-    return *this;  /// and return self.
+    ++ptr_;
+    return *this;
   }
 
   constexpr auto operator++(int) -> KtaIterator {
     KtaIterator temp = *this;
-    ++(*this);     /// Modify self, return the previous
-    return temp;   /// incremented value.
+    ++(*this);
+    return temp;
   }
 
   constexpr auto operator--() -> KtaIterator& {
-    --ptr_;        /// Simply decrement the internal pointer
-    return *this;  /// and return self.
+    --ptr_;
+    return *this;
   }
 
   constexpr auto operator--(int) -> KtaIterator {
     KtaIterator temp = *this;
-    --(*this);     /// Modify self, return the previous
-    return temp;   /// incremented value.
+    --(*this);
+    return temp;
   }
 
   constexpr KtaIterator& operator+=(ptrdiff n) {
-    ptr_ += n;     /// increment ptr_ by n.
-    return *this;  /// and return self.
+    ptr_ += n;
+    return *this;
   }
 
   constexpr KtaIterator& operator-=(ptrdiff n) {
-    ptr_ -= n;     /// decrement ptr_ by n.
-    return *this;  /// and return self.
+    ptr_ -= n;
+    return *this;
   }
 
   constexpr KtaIterator operator+(ptrdiff n) const {
@@ -71,6 +71,7 @@ public:
     return ptr_ - other.ptr_;
   }
 
+  constexpr PointerType ptr() const { return ptr_; }
   constexpr auto operator<=>(const KtaIterator& other) const = default;
 
   constexpr KtaIterator(PointerType ptr) : ptr_(ptr) {}

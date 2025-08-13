@@ -10,6 +10,7 @@ add_library(tests_core OBJECT
   TestCharConv.cpp
   TestLimits.cpp
   TestOStream.cpp
+  TestAtomic.cpp
 )
 
 target_link_libraries(tests_core PUBLIC

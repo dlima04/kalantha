@@ -33,12 +33,12 @@ public:
   NODISCARD_ constexpr Iterator end()   { return end_; }
 
   NODISCARD_ constexpr auto size() const -> usize {
-    const ptrdiff diff = end_ - beg_; /// produces __PTRDIFF_TYPE__
+    const ptrdiff diff = end_ - beg_; /// __PTRDIFF_TYPE__
     return static_cast<usize>(diff);
   }
 
   NODISCARD_ constexpr auto size_bytes() const -> usize {
-    const ptrdiff diff = end_ - beg_; /// produces __PTRDIFF_TYPE__
+    const ptrdiff diff = end_ - beg_; /// __PTRDIFF_TYPE__
     return static_cast<usize>(diff) * sizeof(T);
   }
 

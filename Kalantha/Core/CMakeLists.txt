@@ -21,4 +21,5 @@ add_library(KtaCore INTERFACE
   CharConv.hpp
   DummyTypes.hpp
   OStream.hpp
+  Atomic.hpp
 )

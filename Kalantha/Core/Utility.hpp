@@ -10,7 +10,6 @@
 #include <Kalantha/Core/Types.hpp>
 #include <Kalantha/Core/ClassTraits.hpp>
 #include <Kalantha/Meta/TypeTraits.hpp>
-
 BEGIN_NAMESPACE_KTA_
 
 template<typename T>

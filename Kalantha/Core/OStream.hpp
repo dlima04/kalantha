@@ -11,9 +11,9 @@
 #include <Kalantha/Core/ClassTraits.hpp>
 #include <Kalantha/Core/Assertions.hpp>
 #include <Kalantha/Core/CharConv.hpp>
+BEGIN_NAMESPACE_KTA_
 
 #define KTA_OSTREAM_BUFSIZE_ 1024
-BEGIN_NAMESPACE_KTA_
 
 template<usize buf_size_ = KTA_OSTREAM_BUFSIZE_>
 class OStream {

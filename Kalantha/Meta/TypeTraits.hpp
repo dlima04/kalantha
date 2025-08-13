@@ -222,7 +222,7 @@ template<> inline constexpr bool IsIntegral_<char16_t>            = true;
 template<> inline constexpr bool IsIntegral_<char32_t>            = true;
 
 template<typename T>
-inline constexpr bool IsIntegral = IsIntegral_<Decay<MakeUnsigned<T>>>;
+inline constexpr bool IsIntegral = IsIntegral_<MakeUnsigned<Decay<T>>>;
 
 template<typename T> inline constexpr bool IsLvalueReference      = false;
 template<typename T> inline constexpr bool IsLvalueReference<T&>  = true;
@@ -458,6 +458,15 @@ inline constexpr bool IsTriviallyDestructible = __has_trivial_destructor(T);
 
 #  else
 #error "Cannot detect trivial destructors"
+#  endif
+
+#  if __has_builtin(__is_trivially_copyable)
+
+template<typename T>
+inline constexpr bool IsTriviallyCopyable = __is_trivially_copyable(T);
+
+#  else
+#error "Cannot detect trivial copyability"
 #  endif
 
 template<typename T, typename ...Args>

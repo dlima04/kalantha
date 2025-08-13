@@ -14,7 +14,7 @@
     static_assert(!::kta::IsLvalueReference<decltype((EXPR).release_value())>);    \
     if(!temp_result_.has_value()) return temp_result_.release_error();             \
     temp_result_.release_value();                                                  \
-  })                                                                               \
+  })
 
 
 #define MUST(EXPR)                                                                 \
@@ -23,4 +23,4 @@
     static_assert(!::kta::IsLvalueReference<decltype((EXPR).release_value())>);    \
     KTA_ASSERT(temp_result_.has_value(), "Expr \"" #EXPR "\" has an error!");      \
     temp_result_.release_value();                                                  \
-  })                                                                               \
+  })

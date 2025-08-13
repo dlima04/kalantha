@@ -118,7 +118,7 @@ using PanicFn = void (*)(const PanicInfo&);
 inline constinit PanicFn panic_handler_ = nullptr;
 
 namespace detail_ {
-  inline auto panic_impl_(
+  NORETURN_ inline auto panic_impl_(
     const char* msg_,  const char* fn_name_,
     const char* file_, const int line_ ) -> void
   {
@@ -151,6 +151,8 @@ namespace detail_ {
       ::exit(1);
     }
 #endif
+
+    __builtin_unreachable();
   }
 }
 

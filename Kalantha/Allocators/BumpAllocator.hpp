@@ -16,7 +16,6 @@
 #include <Kalantha/Core/Result.hpp>
 #include <Kalantha/Core/Errors.hpp>
 #include <Kalantha/Allocators/AllocatorBase.hpp>
-
 BEGIN_NAMESPACE_KTA_
 
 class BumpAllocator : public AllocatorBase {
