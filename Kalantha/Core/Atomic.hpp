@@ -6,8 +6,8 @@
 #pragma once
 
 /*
-* Note: we assume the standard intrinsics for atomic memory operations
-* are provided by GCC and Clang (__atomic_store, __atomic_load, etc)
+* Note: we assume that the standard intrinsics for atomic memory operations
+* are provided by GCC and Clang (__atomic_store, __atomic_load, etc).
 */
 
 #include <Kalantha/Core/Common.hpp>
