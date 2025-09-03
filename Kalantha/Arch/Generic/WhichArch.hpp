@@ -5,6 +5,10 @@
 
 #pragma once
 
+/* Here we define some macros which indicate the build platform
+ * and architecture.
+ */
+
 #  if defined(__x86_64__) || defined(_M_X64)
 #define ARCH_X86_64 1
 #  elif defined(__i386__) || defined(_M_IX86)
@@ -71,4 +75,3 @@
 #  if defined(__sh__)
 #define ARCH_SH 1
 #  endif //defined(__sh__)
-

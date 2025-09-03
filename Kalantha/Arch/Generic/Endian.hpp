@@ -62,14 +62,23 @@ enum class Endian {
 #  endif
 };
 
+/**
+ * @brief Is the target platform little-endian?
+ * @return True if the target platform is little-endian.
+ */
 NODISCARD_ constexpr bool is_little_endian() noexcept {
   return Endian::Native == Endian::Little;
 }
 
+/**
+ * @brief Is the target platform big-endian?
+ * @return True if the target platform is big-endian.
+ */
 NODISCARD_ constexpr bool is_big_endian() noexcept {
   return Endian::Native == Endian::Big;
 }
 
+/// Some internal, possibly useless helpers.
 namespace detail_ {
   template<typename T>
   concept BitsAreSwappable = IsIntegral<T> && IsUnsigned<T> && (sizeof(T) > 1);
@@ -85,6 +94,11 @@ namespace detail_ {
   }
 }
 
+/**
+ * @brief Swap the endianness of an unsigned 16-bit integer.
+ * @param value The unsigned 16-bit integer to perform the swap on.
+ * @return The integer parameter, value, with its endianness reversed.
+ */
 NODISCARD_ constexpr auto byteswap16(uint16 value) noexcept -> uint16 {
 #  if defined(KTA_HAS_BUILTIN_BSWAP64_) && !defined(KTA_ASSUME_TESTING_ENV_)
   return __builtin_bswap16(value);
@@ -93,6 +107,11 @@ NODISCARD_ constexpr auto byteswap16(uint16 value) noexcept -> uint16 {
 #  endif
 }
 
+/**
+ * @brief Swap the endianness of an unsigned 32-bit integer.
+ * @param value The unsigned 32-bit integer to perform the swap on.
+ * @return The integer parameter, value, with its endianness reversed.
+ */
 NODISCARD_ constexpr auto byteswap32(uint32 value) noexcept -> uint32 {
 #  if defined(KTA_HAS_BUILTIN_BSWAP64_) && !defined(KTA_ASSUME_TESTING_ENV_)
   return __builtin_bswap32(value);
@@ -102,6 +121,11 @@ NODISCARD_ constexpr auto byteswap32(uint32 value) noexcept -> uint32 {
 #  endif
 }
 
+/**
+ * @brief Swap the endianness of an unsigned 64-bit integer.
+ * @param value The unsigned 64-bit integer to perform the swap on.
+ * @return The integer parameter, value, with its endianness reversed.
+ */
 NODISCARD_ constexpr auto byteswap64(uint64 value) noexcept -> uint64 {
 #  if defined(KTA_HAS_BUILTIN_BSWAP64_) && !defined(KTA_ASSUME_TESTING_ENV_)
   return __builtin_bswap64(value);
@@ -122,11 +146,21 @@ NODISCARD_ constexpr auto byteswap64(uint64 value) noexcept -> uint64 {
 #  endif
 }
 
+/**
+ * @brief For 1-byte endian swaps (a dummy function, no operation occurs, obviously).
+ * @param value The dummy value.
+ * @return That same value which was provided as a parameter.
+ */
 template<typename T> requires(sizeof(T) == 1)
 NODISCARD_ constexpr auto byteswap(T value) noexcept -> T {
   return value;
 }
 
+/**
+ * @brief Perform a 16-bit endian swap on an integer value of type T.
+ * @param value The integer value to perform the endian-swap on.
+ * @return The integer parameter, value, with its endianness reversed.
+ */
 template<typename T> requires(sizeof(T) == 2)
 NODISCARD_ constexpr auto byteswap(T value) noexcept -> T {
   auto unsigned_val = detail_::to_unsigned(value);
@@ -134,6 +168,11 @@ NODISCARD_ constexpr auto byteswap(T value) noexcept -> T {
   return detail_::from_unsigned<T>(static_cast<UnsignedT<T>>(swapped));
 }
 
+/**
+ * @brief Perform a 32-bit endian swap on an integer value of type T.
+ * @param value The integer value to perform the endian-swap on.
+ * @return The integer parameter, value, with its endianness reversed.
+ */
 template<typename T> requires(sizeof(T) == 4)
 NODISCARD_ constexpr auto byteswap(T value) noexcept -> T {
   auto unsigned_val = detail_::to_unsigned(value);
@@ -141,6 +180,11 @@ NODISCARD_ constexpr auto byteswap(T value) noexcept -> T {
   return detail_::from_unsigned<T>(static_cast<UnsignedT<T>>(swapped));
 }
 
+/**
+ * @brief Perform a 64-bit endian swap on an integer value of type T.
+ * @param value The integer value to perform the endian-swap on.
+ * @return The integer parameter, value, with its endianness reversed.
+ */
 template<typename T> requires(sizeof(T) == 8)
 NODISCARD_ constexpr auto byteswap(T value) noexcept -> T{
   auto unsigned_val = detail_::to_unsigned(value);
@@ -148,66 +192,44 @@ NODISCARD_ constexpr auto byteswap(T value) noexcept -> T{
   return detail_::from_unsigned<T>(static_cast<UnsignedT<T>>(swapped));
 }
 
+/**
+ * @brief Swap the endianness of an integer value from its host endianness to big.
+ * @param value The integer value of type T to perform the endian-swap on.
+ * @return The integer parameter, value, with its endianness changed to big.
+ */
 template<Integer T>
 NODISCARD_ constexpr auto host_to_big(T value) noexcept -> T {
   return is_little_endian() ? byteswap(value) : value;
 }
 
+/**
+ * @brief Swap the endianness of an integer value from its host endianness to little.
+ * @param value The integer value of type T to perform the endian-swap on.
+ * @return The integer parameter, value, with its endianness changed to little.
+ */
 template<Integer T>
 NODISCARD_ constexpr auto host_to_little(T value) noexcept -> T {
   return is_big_endian() ? byteswap(value) : value;
 }
 
+/**
+ * @brief Swap the endianness of an integer value from big to the platform's native byte order.
+ * @param value The integer value of type T to perform the endian-swap on.
+ * @return The integer parameter, value, with its endianness changed to the platform's native byte order.
+ */
 template<Integer T>
 NODISCARD_ constexpr auto big_to_host(T value) noexcept -> T {
   return is_little_endian() ? byteswap(value) : value;
 }
 
+/**
+ * @brief Swap the endianness of an integer value from little to the platform's native byte order.
+ * @param value The integer value of type T to perform the endian-swap on.
+ * @return The integer parameter, value, with its endianness changed to the platform's native byte order.
+ */
 template<Integer T>
 NODISCARD_ constexpr auto little_to_host(T value) noexcept -> T {
   return is_big_endian() ? byteswap(value) : value;
-}
-
-template<Integer T>
-NODISCARD_ auto load_big_endian(const void* ptr) noexcept -> T {
-  const auto* bytes = static_cast<const uint8*>(ptr);
-  T result = 0;
-
-  for(usize i = 0; i < sizeof(T); ++i) {
-    result = static_cast<T>((result << 8) | bytes[i]);
-  }
-
-  return result;
-}
-
-template<Integer T>
-NODISCARD_ auto load_little_endian(const void* ptr) noexcept -> T {
-  const auto* bytes = static_cast<const uint8*>(ptr);
-  T result = 0;
-
-  for(usize i = 0; i < sizeof(T); ++i) {
-    result = static_cast<T>(result | (static_cast<T>(bytes[i]) << (i * 8)));
-  }
-
-  return result;
-}
-
-template<Integer T>
-auto store_big_endian(void* ptr, T value) noexcept -> void {
-  auto* bytes = static_cast<uint8*>(ptr);
-
-  for(usize i = 0; i < sizeof(T); ++i) {
-    bytes[i] = static_cast<uint8>(value >> ((sizeof(T) - 1 - i) * 8));
-  }
-}
-
-template<Integer T>
-auto store_little_endian(void* ptr, T value) noexcept -> void {
-  auto* bytes = static_cast<uint8*>(ptr);
-
-  for(usize i = 0; i < sizeof(T); ++i) {
-    bytes[i] = static_cast<uint8>(value >> (i * 8));
-  }
 }
 
 END_NAMESPACE_KTA_
